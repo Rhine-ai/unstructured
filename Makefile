@@ -310,6 +310,20 @@ docker-test:
 docker-smoke-test:
 	DOCKER_IMAGE=${DOCKER_IMAGE} ./scripts/docker-smoke-test.sh
 
+.PHONY: docker_build
+docker_build:
+	DOCKER_BUILDKIT=1 docker build \
+	--rm \
+	-t raahulrahl/rhine-ai-unstructured:latest \
+	-t raahulrahl/rhine-ai-unstructured:$(VERSION) \
+	-f Dockerfile .
+
+.PHONY: docker_build_push
+docker_build_push:
+	docker push raahulrahl/rhine-ai-unstructured:latest || exit 1
+	docker push raahulrahl/rhine-ai-unstructured:$(VERSION) || exit 1
+
+
 
 ###########
 # Jupyter #
@@ -323,3 +337,5 @@ docker-jupyter-notebook:
 .PHONY: run-jupyter
 run-jupyter:
 	PYTHONPATH=$(realpath .) JUPYTER_PATH=$(realpath .) jupyter-notebook --NotebookApp.token='' --NotebookApp.password=''
+
+
