@@ -3,6 +3,7 @@ PIP_VERSION := 23.2.1
 CURRENT_DIR := $(shell pwd)
 ARCH := $(shell uname -m)
 PYTHON ?= python3
+VERSION = $(shell cat VERSION)
 
 .PHONY: help
 help: Makefile
