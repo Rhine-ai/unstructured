@@ -20,8 +20,8 @@ RUN chown -R notebook-user:notebook-user /app && \
 USER notebook-user
 
 # Install Python dependencies, including FastAPI and Uvicorn
-RUN find requirements/ -type f -name "*.txt" -exec python3.11 -m pip install --no-cache-dir --user -r '{}' ';' && \
-  python3.11 -m pip install --no-cache-dir --user fastapi uvicorn && \ 
+RUN find requirements/ -type f -name "*.txt" -exec pip3.11 install --no-cache-dir --user -r '{}' ';' && \
+  pip3.11 install --no-cache-dir --user fastapi uvicorn && \ 
   python3.11 -c "from unstructured.nlp.tokenize import download_nltk_packages; download_nltk_packages()" && \
   python3.11 -c "from unstructured.partition.model_init import initialize; initialize()" && \
   python3.11 -c "from unstructured_inference.models.tables import UnstructuredTableTransformerModel; model = UnstructuredTableTransformerModel(); model.initialize('microsoft/table-transformer-structure-recognition')"
