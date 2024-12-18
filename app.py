@@ -128,9 +128,9 @@ async def process_file(file: UploadFile = File(...)):
     
     # Process the file using `partition`
     elements = partition(filename=temp_file_path)
-    result = elements_to_markdown(elements)
+    #result = elements_to_markdown(elements)
     
     # Clean up the temporary file
-    #result = "\n\n".join([str(el) for el in elements])
+    result = "\n\n".join([str(el) for el in elements])
     
     return {"elements": result}
